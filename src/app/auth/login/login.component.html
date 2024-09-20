@@ -1,0 +1,27 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow" style="width: 22rem;">
+    <div class="text-center">
+      <i class="fas fa-first-aid mb-3" style="font-size: 50px; color: #5cb85c;"></i> <!-- Ícono de botiquín -->
+      <h3>Bienvenido</h3>
+      <p class="text-muted">al centro médico Clínica San Martín</p>
+    </div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="usuario" class="form-label visually-hidden">Usuario</label>
+        <input type="text" id="usuario" class="form-control" [(ngModel)]="usuario" name="usuario" placeholder="Usuario" required>
+      </div>
+      <div class="mb-3">
+        <label for="contrasenia" class="form-label visually-hidden">Contraseña</label>
+        <div class="input-group">
+          <input type="password" id="contrasenia" class="form-control" [(ngModel)]="contrasenia" name="contrasenia" placeholder="Contraseña" required>
+          <button class="btn btn-outline-secondary" type="button" id="toggle-password">
+            <i class="fa fa-eye"></i> <!-- Ícono de ojo para mostrar/ocultar contraseña -->
+          </button>
+        </div>
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-success">Ingresar</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [RouterModule]  // Importa RouterModule aquí para que <router-outlet> funcione
 })
 export class AppComponent {
-  title = 'IntegradorSoftwareII';
+  title = 'Mi Aplicación Angular';
 }

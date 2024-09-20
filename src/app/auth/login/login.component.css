@@ -1,0 +1,27 @@
+.login-container {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .login-icon {
+    width: 50px;
+  }
+  
+  .card {
+    border-radius: 10px;
+  }
+  
+  .form-control {
+    border-radius: 5px;
+  }
+  
+  .btn-success {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+  }
+  
+  .btn-outline-secondary {
+    border: none;
+    background: transparent;
+  }
+  

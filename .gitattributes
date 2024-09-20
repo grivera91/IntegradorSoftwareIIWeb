@@ -1,0 +1,5 @@
+# Forzar que todos los archivos de texto usen LF (Unix-style)
+* text=auto eol=lf
+
+# Ignorar carpetas específicas como el caché de Angular
+.angular/cache/ text eol=lf
