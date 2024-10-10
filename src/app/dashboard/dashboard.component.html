@@ -1,0 +1,63 @@
+<div class="container-fluid d-flex vh-100">
+  <div class="sidebar bg-light border-end p-3 d-flex flex-column justify-content-between">
+    <div class="sidebar-content">
+      <h4>Bienvenido <i class="bi bi-person-circle"></i></h4>
+      <p>{{ nombre }} {{ apellidoPaterno }}</p>
+
+      <div class="d-grid gap-2">
+        <!-- Grupo de acciones por categoría -->
+        <div *ngFor="let categoria of categorias" class="mb-2">
+          <button class="btn btn-primary w-100" type="button" (click)="alternarCategoria(categoria)">
+            {{ categoria }}
+          </button>
+
+          <!-- Lista de acciones dentro de la categoría -->
+          <div *ngIf="estadoColapsado[categoria]" class="collapse show">
+            <button *ngFor="let accion of accionesDisponibles[categoria]" 
+                    class="btn btn-secondary btn-sm w-100 mt-1" 
+                    (click)="abrirFormulario(accion)">
+              {{ getLabelAccion(accion) }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección inferior solo para el botón de cerrar sesión -->
+    <div class="sidebar-footer">
+      <button class="btn btn-danger btn-sm w-100" (click)="cerrarSesion()">Cerrar Sesión</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content flex-grow-1 p-4" *ngIf="!formularioActivo">
+    <div class="top-bar d-flex justify-content-between align-items-center border-bottom pb-2 mb-4">
+      <h5>Clínica San Martín</h5>
+      <p><a href="#">www.clinicasanmartin.com</a></p>
+    </div>
+
+    <!-- Mensaje de bienvenida -->
+    <div class="content h-100 d-flex align-items-center justify-content-center">
+      <p>Bienvenido al sistema de gestión. Usa el menú lateral para navegar.</p>
+    </div>
+  </div>
+
+  <!-- Formulario activo -->
+  <ng-container *ngIf="formularioActivo">
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'registroUsuario'">
+      <app-register-user (onClose)="cerrarFormulario()"></app-register-user>
+    </div>
+
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'listaUsuarios'">
+      <app-lista-usuarios (onClose)="cerrarFormulario()"></app-lista-usuarios>
+    </div>
+
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'registroPaciente'">
+      <app-registro-paciente (onClose)="cerrarFormulario()"></app-registro-paciente>
+    </div>
+
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'listaPacientes'">
+      <app-lista-paciente (onClose)="cerrarFormulario()"></app-lista-paciente>
+    </div>
+  </ng-container>
+</div>

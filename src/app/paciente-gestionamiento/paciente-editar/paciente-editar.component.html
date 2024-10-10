@@ -1,0 +1,142 @@
+<div *ngIf="pacienteUsuario" class="container">
+    <h3>Editar Paciente: {{ pacienteUsuario.usuario.nombre }} {{ pacienteUsuario.usuario.apellidoPaterno }}</h3>
+
+    <form>
+        <div class="row">
+            <!-- Nombre -->
+            <div class="col-md-6 mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" [(ngModel)]="usuarioRequest.nombre" name="nombre" class="form-control">
+            </div>
+
+            <!-- Apellido Paterno -->
+            <div class="col-md-6 mb-3">
+                <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
+                <input type="text" id="apellidoPaterno" [(ngModel)]="usuarioRequest.apellidoPaterno" name="apellidoPaterno" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Apellido Materno -->
+            <div class="col-md-6 mb-3">
+                <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
+                <input type="text" id="apellidoMaterno" [(ngModel)]="usuarioRequest.apellidoMaterno" name="apellidoMaterno" class="form-control">
+            </div>
+
+            <!-- DNI -->
+            <div class="col-md-6 mb-3">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" id="dni" [(ngModel)]="usuarioRequest.dni" name="dni" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Correo Electrónico -->
+            <div class="col-md-6 mb-3">
+                <label for="correoElectronico" class="form-label">Correo Electrónico</label>
+                <input type="email" id="correoElectronico" [(ngModel)]="usuarioRequest.correoElectronico" name="correoElectronico" class="form-control">
+            </div>
+
+            <!-- Fecha de Nacimiento -->
+            <div class="col-md-6 mb-3">
+                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" [(ngModel)]="usuarioRequest.fechaNacimiento" name="fechaNacimiento" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Género -->
+            <div class="col-md-6 mb-3">
+                <label for="genero" class="form-label">Género</label>
+                <select id="genero" [(ngModel)]="usuarioRequest.genero" name="genero" class="form-select">
+                    <option value="">Seleccione género</option>
+                    <option *ngFor="let genero of generos" [value]="genero.id">{{ genero.nombre }}</option>
+                </select>
+            </div>
+
+            <!-- Número Telefónico -->
+            <div class="col-md-6 mb-3">
+                <label for="numeroTelefonico" class="form-label">Número Telefónico</label>
+                <input type="text" id="numeroTelefonico" [(ngModel)]="usuarioRequest.numeroTelefonico" name="numeroTelefonico" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Dirección -->
+            <div class="col-md-6 mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" id="direccion" [(ngModel)]="usuarioRequest.direccion" name="direccion" class="form-control">
+            </div>
+
+            <!-- Rol de Usuario -->
+            <div class="col-md-6 mb-3">
+                <label for="rolUsuario" class="form-label">Rol de Usuario</label>
+                <select id="rolUsuario" [(ngModel)]="usuarioRequest.rolUsuario" name="rolUsuario" class="form-select">
+                    <option value="">Seleccionar Rol</option>
+                    <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Contraseña -->
+            <div class="col-md-6 mb-3">
+                <label for="contrasenia" class="form-label">Nueva Contraseña (opcional)</label>
+                <input type="password" id="contrasenia" [(ngModel)]="usuarioRequest.contrasenia" name="contrasenia" class="form-control" placeholder="Ingresa nueva contraseña si deseas cambiarla">
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <!-- Tipo de Sangre -->
+            <div class="col-md-6 mb-3">
+                <label for="idTipoSangre" class="form-label">Tipo de Sangre</label>
+                <select id="idTipoSangre" [(ngModel)]="pacienteRequest.idTipoSangre" name="idTipoSangre" class="form-select">
+                    <option value="">Seleccionar Tipo de Sangre</option>
+                    <option *ngFor="let tipo of tiposSangre" [value]="tipo.id">{{ tipo.nombre }}</option>
+                </select>
+            </div>
+
+            <!-- Alergias -->
+            <div class="col-md-6 mb-3">
+                <label for="alergias" class="form-label">Alergias</label>                
+                <textarea id="alergias" [(ngModel)]="pacienteRequest.alergias" name="alergias" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Enfermedades Preexistentes -->
+            <div class="col-md-6 mb-3">
+                <label for="enfermedadesPreexistentes" class="form-label">Enfermedades Preexistentes</label>                
+                <textarea id="enfermedadesPreexistentes" [(ngModel)]="pacienteRequest.enfermedadesPreexistentes" name="enfermedadesPreexistentes" class="form-control"></textarea>
+            </div>
+
+            <!-- Contacto de Emergencia -->
+            <div class="col-md-6 mb-3">
+                <label for="contactoEmergencia" class="form-label">Contacto de Emergencia</label>                
+                <textarea id="contactoEmergencia" [(ngModel)]="pacienteRequest.contactoEmergencia" name="contactoEmergencia" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Número de Contacto de Emergencia -->
+            <div class="col-md-6 mb-3">
+                <label for="numeroContactoEmergencia" class="form-label">Número de Contacto de Emergencia</label>                
+                <textarea id="numeroContactoEmergencia" [(ngModel)]="pacienteRequest.numeroContactoEmergencia" name="numeroContactoEmergencia" class="form-control"></textarea>
+            </div>
+
+            <!-- Observaciones -->
+            <div class="col-md-6 mb-3">
+                <label for="observaciones" class="form-label">Observaciones</label>
+                <textarea id="observaciones" [(ngModel)]="pacienteRequest.observaciones" name="observaciones" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="d-flex justify-content-end mt-4">
+            <button type="button" class="btn btn-success me-2" (click)="guardarCambios()">Guardar</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

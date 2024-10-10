@@ -1,0 +1,57 @@
+<div class="container mt-4 form-container">
+    <h3 class="mb-4" *ngIf="!pacienteUsuarioSeleccionado">Lista de Pacientes</h3>
+  
+    <div *ngIf="!pacienteUsuarioSeleccionado">
+        <!-- Filtros -->
+        <div class="row mb-4 align-items-center">
+            <!-- Filtro de búsqueda por nombre completo o DNI -->
+            <div class="col-md-4">
+                <input 
+                    type="text" 
+                    id="filtroBusqueda" 
+                    class="form-control filtro-input" 
+                    [(ngModel)]="filtroBusqueda" 
+                    (input)="filtrarPacientes()" 
+                    placeholder="Buscar por nombre, apellidos o DNI del usuario">
+            </div>
+        </div>
+  
+        <!-- Lista de pacientes -->
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre Completo del Usuario</th>
+                    <th>Número Historia Clínica</th>
+                    <th>Tipo de Sangre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pacienteUsuario of pacienteUsuarioFiltrados">
+                    <td>{{ pacienteUsuario.usuario.dni }}</td>
+                    <td>{{ pacienteUsuario.usuario.nombre }} {{ pacienteUsuario.usuario.apellidoPaterno }} {{ pacienteUsuario.usuario.apellidoMaterno }}</td>
+                    <td>{{ pacienteUsuario.paciente.numeroHistoriaClinica }}</td>
+                    <td>{{ obtenerTipoSangre(pacienteUsuario.paciente.idTipoSangre) }}</td>
+                    <td class="text-end">
+                        <button class="btn btn-outline-primary btn-sm me-2" (click)="editarPaciente(pacienteUsuario)">
+                            <i class="bi bi-pencil"></i> Editar
+                        </button>
+                        <button 
+                            class="btn btn-sm"
+                            [ngClass]="pacienteUsuario.usuario.esActivo ? 'btn-outline-danger' : 'btn-outline-success'"
+                            (click)="cambiarEstadoUsuario(pacienteUsuario.usuario.idUsuario)">
+                            <i class="bi" [ngClass]="pacienteUsuario.usuario.esActivo ? 'bi-x-circle' : 'bi-check-circle'"></i> 
+                            {{ pacienteUsuario.usuario.esActivo ? 'Desactivar' : 'Activar' }}
+                        </button>            
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Formulario de edición de usuario -->
+    <div *ngIf="pacienteUsuarioSeleccionado">
+        <app-paciente-editar [pacienteUsuario]="pacienteUsuarioSeleccionado" (onClose)="cerrarEdicion()"></app-paciente-editar>
+    </div>    
+</div>

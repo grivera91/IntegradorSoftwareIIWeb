@@ -1,0 +1,79 @@
+<div class="container mt-4 form-container">
+    <h3 class="mb-4" *ngIf="!usuarioSeleccionado">Lista de Usuarios</h3>
+
+    <!-- Filtros y tabla de usuarios, solo si no estás editando un usuario -->
+    <div *ngIf="!usuarioSeleccionado">
+      <!-- Filtros -->
+      <div class="row mb-4 align-items-center">
+        <div class="col-md-4">
+        <input 
+          type="text" 
+          id="filtroBusqueda" 
+          class="form-control filtro-input" 
+          [(ngModel)]="filtroBusqueda" 
+          (input)="filtrarUsuarios()" 
+          placeholder="Buscar por nombre o apellidos">
+      </div>
+
+      <div class="col-md-4">
+        <select 
+          id="filtroRol" 
+          class="form-select filtro-select" 
+          [(ngModel)]="filtroRol" 
+          (change)="filtrarUsuarios()">
+          <option value="">Todos los roles</option>
+          <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <select 
+          id="filtroEsAdmin" 
+          class="form-select filtro-select" 
+          [(ngModel)]="filtroEsAdmin" 
+          (change)="filtrarUsuarios()">
+          <option value="">Todos los tipos</option>
+          <option *ngFor="let tipo of tipoUsuarios" [value]="tipo.id">{{ tipo.nombre }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Lista de usuarios -->
+    <table class="table table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>DNI</th>
+          <th>Nombre Completo</th>            
+          <th>Rol</th>
+          <th>Es Administrador</th>            
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuariosFiltrados">
+          <td>{{ usuario.dni }}</td>
+          <td>{{ usuario.nombre }} {{ usuario.apellidoPaterno }} {{ usuario.apellidoMaterno }}</td>            
+          <td>{{ obtenerNombreRol(usuario.rolUsuario) }}</td>
+          <td>{{ usuario.esAdmin ? 'Sí' : 'No' }}</td>            
+          <td class="text-end">
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="editarUsuario(usuario)">
+              <i class="bi bi-pencil"></i> Editar
+            </button>
+            <button 
+              class="btn btn-sm"
+              [ngClass]="usuario.esActivo ? 'btn-outline-danger' : 'btn-outline-success'"
+              (click)="cambiarEstadoUsuario(usuario.idUsuario)">
+              <i class="bi" [ngClass]="usuario.esActivo ? 'bi-x-circle' : 'bi-check-circle'"></i> 
+              {{ usuario.esActivo ? 'Desactivar' : 'Activar' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulario de edición de usuario -->
+  <div *ngIf="usuarioSeleccionado">
+    <app-usuario-editar [usuario]="usuarioSeleccionado" (onClose)="cerrarEdicion()"></app-usuario-editar>
+  </div>
+</div>

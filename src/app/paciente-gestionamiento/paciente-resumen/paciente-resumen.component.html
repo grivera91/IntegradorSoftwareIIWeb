@@ -1,0 +1,96 @@
+<div *ngIf="usuario && paciente" class="form-container container">
+    <h2>Paciente Registrado</h2> 
+
+    <form>
+        <!-- Datos de Usuario -->
+        <div class="row">
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Nombre:</label>
+                <input type="text" [value]="usuario.nombre" readonly class="form-control flex-grow-1">
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Apellido Paterno:</label>
+                <input type="text" [value]="usuario.apellidoPaterno" readonly class="form-control flex-grow-1">
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Apellido Materno:</label>
+                <input type="text" [value]="usuario.apellidoMaterno" readonly class="form-control flex-grow-1">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>DNI:</label>
+                <input type="text" [value]="usuario.dni" readonly class="form-control flex-grow-1">
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Correo Electrónico:</label>
+                <input type="email" [value]="usuario.correoElectronico" readonly class="form-control flex-grow-1">
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Fecha de Nacimiento:</label>
+                <input type="text" [value]="usuario.fechaNacimiento | date:'yyyy-MM-dd'" readonly class="form-control flex-grow-1">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Género:</label>
+                <select [ngModel]="usuario.genero" class="form-control flex-grow-1" disabled>
+                    <option *ngFor="let genero of generos" [value]="genero.id">
+                        {{ genero.nombre }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Número Telefónico:</label>
+                <input type="text" [value]="usuario.numeroTelefonico" readonly class="form-control flex-grow-1">
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Dirección:</label>
+                <input type="text" [value]="usuario.direccion" readonly class="form-control flex-grow-1">
+            </div>
+        </div>        
+
+        <!-- Datos de Paciente -->
+        <div class="row">
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Tipo de Sangre:</label>
+                <select [ngModel]="paciente.idTipoSangre" class="form-control flex-grow-1" disabled>
+                    <option *ngFor="let tipo of tipoSangre" [value]="tipo.id">
+                        {{ tipo.nombre }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Alergias:</label>
+                <input type="text" [value]="paciente.alergias" readonly class="form-control flex-grow-1">
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Enfermedades Preexistentes:</label>
+                <input type="text" [value]="paciente.enfermedadesPreexistentes" readonly class="form-control flex-grow-1">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>TContacto Emergencia:</label>
+                <input type="text" [value]="paciente.contactoEmergencia" readonly class="form-control flex-grow-1">
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Número de Contacto de Emergencia:</label>
+                <input type="text" [value]="paciente.numeroContactoEmergencia" readonly class="form-control flex-grow-1">
+            </div>
+            <div class="form-group col-md-4 d-flex flex-column">
+                <label>Observaciones:</label>
+                <input type="text" [value]="paciente.observaciones" readonly class="form-control flex-grow-1">
+            </div>
+        </div>
+
+        <!-- Boton para cerrar formulario -->
+        <div class="d-flex justify-content-center mt-4">
+            <button type="button" class="btn btn-success" (click)="finalizarFormulario()">Continuar</button>
+        </div>
+    </form>
+
+</div>

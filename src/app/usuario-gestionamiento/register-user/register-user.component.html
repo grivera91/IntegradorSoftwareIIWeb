@@ -1,0 +1,162 @@
+<div class="container mt-4 form-container">
+  <h3 class="mb-4" *ngIf="!usuarioRegistrado">Registrar Nuevo Usuario</h3>
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" *ngIf="!usuarioRegistrado" novalidate> 
+
+    <div class="row mb-3">
+      <!-- Nombre -->
+      <div class="col-md-6 position-relative">
+        <label for="nombre" class="form-label">Nombres</label>
+        <input 
+          type="text" 
+          id="nombre" 
+          class="form-control" 
+          [(ngModel)]="nombre" 
+          name="nombre" 
+          required 
+          (ngModelChange)="onNameOrSurnameChange()"
+          [ngClass]="{'is-invalid': registerForm.submitted && !nombre}">
+        <div *ngIf="registerForm.submitted && !nombre" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+
+      <!-- Apellido Paterno -->
+      <div class="col-md-6 position-relative">
+        <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
+        <input 
+          type="text" 
+          id="apellidoPaterno" 
+          class="form-control" 
+          [(ngModel)]="apellidoPaterno" 
+          name="apellidoPaterno" 
+          required
+          (ngModelChange)="onNameOrSurnameChange()"
+          [ngClass]="{'is-invalid': registerForm.submitted && !apellidoPaterno}">
+        <div *ngIf="registerForm.submitted && !apellidoPaterno" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <!-- Apellido Materno -->
+      <div class="col-md-6 position-relative">
+        <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
+        <input 
+          type="text" 
+          id="apellidoMaterno" 
+          class="form-control" 
+          [(ngModel)]="apellidoMaterno" 
+          name="apellidoMaterno" 
+          required 
+          [ngModel]="apellidoMaterno | titlecase"
+          [ngClass]="{'is-invalid': registerForm.submitted && !apellidoMaterno}">
+        <div *ngIf="registerForm.submitted && !apellidoMaterno" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+
+      <!-- Usuario de Acceso -->
+      <div class="col-md-6 position-relative">
+        <label for="usuarioAcceso" class="form-label">Usuario de Acceso</label>
+        <input type="text" id="usuarioAcceso" class="form-control" [(ngModel)]="usuarioAcceso" name="usuarioAcceso" required [ngClass]="{'is-invalid': registerForm.submitted && !usuarioAcceso}">
+        <div *ngIf="registerForm.submitted && !usuarioAcceso" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <!-- Contraseña -->
+      <div class="col-md-6 position-relative">
+        <label for="contrasenia" class="form-label">Contraseña</label>
+        <input type="text" id="contrasenia" class="form-control" [(ngModel)]="contrasenia" name="contrasenia" required [ngClass]="{'is-invalid': registerForm.submitted && !contrasenia}">
+        <div *ngIf="registerForm.submitted && !contrasenia" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+
+      <!-- Confirmar Contraseña -->
+      <div class="col-md-6 position-relative">
+        <label for="confirmarContrasenia" class="form-label">Confirmar Contraseña</label>
+        <input type="text" id="confirmarContrasenia" class="form-control" [(ngModel)]="confirmarContrasenia" name="confirmarContrasenia" required [ngClass]="{'is-invalid': registerForm.submitted && !confirmarContrasenia}">
+        <div *ngIf="registerForm.submitted && !confirmarContrasenia" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <!-- DNI -->
+      <div class="col-md-6 position-relative">
+        <label for="dni" class="form-label">DNI</label>
+        <input type="number" id="dni" class="form-control" [(ngModel)]="dni" name="dni" required [ngClass]="{'is-invalid': registerForm.submitted && !dni}">
+        <div *ngIf="registerForm.submitted && !dni" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+
+      <!-- Fecha de Nacimiento -->
+      <div class="col-md-6 position-relative">
+        <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+        <input type="date" id="fechaNacimiento" class="form-control" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" required [ngClass]="{'is-invalid': registerForm.submitted && !fechaNacimiento}">
+        <div *ngIf="registerForm.submitted && !fechaNacimiento" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <!-- Género -->
+      <div class="col-md-6 position-relative">
+        <label for="genero" class="form-label">Género</label>
+        <select id="genero" class="form-select" [(ngModel)]="genero" name="genero" required [ngClass]="{'is-invalid': registerForm.submitted && !genero}">
+          <option value="">Seleccione género</option>
+          <option *ngFor="let genero of generos" [value]="genero.id">{{ genero.nombre }}</option>
+        </select>
+        <div *ngIf="registerForm.submitted && !genero" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+
+      <!-- Correo Electrónico -->
+      <div class="col-md-6 position-relative">
+        <label for="correoElectronico" class="form-label">Correo Electrónico</label>
+        <input 
+          type="email" 
+          id="correoElectronico" 
+          class="form-control" 
+          [(ngModel)]="correoElectronico" 
+          name="correoElectronico" 
+          required
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+          [ngClass]="{'is-invalid': registerForm.submitted && (!correoElectronico || !registerForm.form.controls['correoElectronico'].valid)}">
+        <div *ngIf="registerForm.submitted && !correoElectronico" class="invalid-feedback">Este campo es obligatorio.</div>
+        <div *ngIf="registerForm.submitted && !registerForm.form.controls['correoElectronico'].valid" class="invalid-feedback">
+          Por favor ingrese un formato de correo válido.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <!-- Número Telefónico -->
+      <div class="col-md-6 position-relative">
+        <label for="numeroTelefonico" class="form-label">Celular</label>
+        <input type="number" id="numeroTelefonico" class="form-control" [(ngModel)]="numeroTelefonico" name="numeroTelefonico" required [ngClass]="{'is-invalid': registerForm.submitted && !numeroTelefonico}">
+        <div *ngIf="registerForm.submitted && !numeroTelefonico" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+
+      <!-- Dirección -->
+      <div class="col-md-6 position-relative">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input type="text" id="direccion" class="form-control" [(ngModel)]="direccion" name="direccion" required [ngClass]="{'is-invalid': registerForm.submitted && !direccion}">
+        <div *ngIf="registerForm.submitted && !direccion" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <!-- Rol -->
+      <div class="col-md-6 position-relative">
+        <label for="rolUsuario" class="form-label">Rol</label>
+        <select id="rolUsuario" class="form-select" [(ngModel)]="rolUsuario" name="rolUsuario" required (change)="onRoleChange()" [ngClass]="{'is-invalid': registerForm.submitted && !rolUsuario}">
+          <option value="">Seleccionar Rol</option>
+          <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
+        </select>
+        <div *ngIf="registerForm.submitted && !rolUsuario" class="invalid-feedback">Este campo es obligatorio.</div>
+      </div>     
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="d-flex justify-content-between w-100 botones-con-margen">
+      <button type="submit" class="btn btn-primary flex-grow-1 mx-2">Registrar</button>
+      <button type="reset" class="btn btn-secondary flex-grow-1 mx-2" (click)="resetForm()">Limpiar</button>
+      <button type="button" class="btn btn-danger flex-grow-1 mx-2" (click)="cerrarFormulario()">Cancelar</button>
+    </div>
+  </form>
+
+  <div *ngIf="usuarioRegistrado">
+    <app-usuario-resumen [usuario]="usuarioRegistrado" (onClose)="finalizarFormulario()"></app-usuario-resumen>
+  </div>  
+</div>

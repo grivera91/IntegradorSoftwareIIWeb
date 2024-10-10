@@ -1,0 +1,36 @@
+.container-fluid {
+    display: flex;
+    height: 100vh; /* Hace que el contenedor ocupe toda la altura de la ventana */
+  }
+  
+  .sidebar {
+    width: 250px; /* Ancho fijo del sidebar */
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh; /* Ocupa toda la altura */
+    background-color: #f8f9fa; /* Color de fondo claro */
+    border-right: 1px solid #dee2e6; /* Borde para separar el sidebar del contenido principal */
+    padding: 15px;
+  }
+  
+  .main-content {
+    margin-left: 250px; /* Deja espacio para el sidebar */
+    overflow-y: auto; /* Permite desplazamiento del contenido principal */
+    width: calc(100% - 250px); /* Ajusta el ancho del contenido */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    padding: 20px;
+    position: relative;
+  }
+  
+  .formulario-content {
+    margin-left: 250px; /* Deja espacio para el sidebar */
+    position: relative;
+    background-color: white; /* Fondo blanco para los formularios */
+    padding: 20px;
+    overflow-y: auto;
+    width: calc(100% - 250px); /* Ajusta el ancho del formulario al resto de la pantalla */
+    height: auto;
+  }
+  

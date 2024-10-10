@@ -1,0 +1,66 @@
+<div *ngIf="usuario" class="form-container container">
+  <h2>Usuario Registrado</h2> 
+
+  <form>  
+    <div class="row">
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Nombre:</label>
+        <input type="text" [value]="usuario.nombre" readonly class="form-control flex-grow-1">
+      </div>
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Apellido Paterno:</label>
+        <input type="text" [value]="usuario.apellidoPaterno" readonly class="form-control flex-grow-1">
+      </div>
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Apellido Materno:</label>
+        <input type="text" [value]="usuario.apellidoMaterno" readonly class="form-control flex-grow-1">
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>DNI:</label>
+        <input type="text" [value]="usuario.dni" readonly class="form-control flex-grow-1">
+      </div>
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Correo Electrónico:</label>
+        <input type="email" [value]="usuario.correoElectronico" readonly class="form-control flex-grow-1">
+      </div>
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Fecha de Nacimiento:</label>
+        <input type="text" [value]="usuario.fechaNacimiento | date:'yyyy-MM-dd'" readonly class="form-control flex-grow-1">
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Género:</label>
+        <input type="text" [value]="usuario.genero === 1 ? 'Masculino' : 'Femenino'" readonly class="form-control flex-grow-1">
+      </div>
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Número Telefónico:</label>
+        <input type="text" [value]="usuario.numeroTelefonico" readonly class="form-control flex-grow-1">
+      </div>
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Dirección:</label>
+        <input type="text" [value]="usuario.direccion" readonly class="form-control flex-grow-1">
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Rol de Usuario:</label>
+        <input type="text" [value]="usuario.rolUsuario === 1 ? 'Recepcionista' : usuario.rolUsuario === 2 ? 'Médico' : 'Paciente'" readonly class="form-control flex-grow-1">
+      </div>
+      <div class="form-group col-md-4 d-flex flex-column">
+        <label>Es Administrador:</label>
+        <input type="text" [value]="usuario.esAdmin ? 'Sí' : 'No'" readonly class="form-control flex-grow-1">
+      </div>
+    </div>
+
+    <!-- Botón verde "Aceptar" centrado al final del formulario -->
+    <div class="d-flex justify-content-center mt-4">
+      <button type="button" class="btn btn-success" (click)="finalizarFormulario()">Continuar</button>
+    </div>
+  </form>
+</div>
