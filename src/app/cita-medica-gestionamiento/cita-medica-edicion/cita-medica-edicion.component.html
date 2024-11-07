@@ -1,0 +1,50 @@
+<div class="detalle-cita-container">
+  <h4>Detalle de la Cita Médica</h4>
+  
+  <div class="form-group-row">
+    <div class="form-group">
+      <label><strong>Código de Cita:</strong></label>
+      <p>{{ citaMedica.codigoCitaMedica }}</p>
+    </div>
+    
+    <div class="form-group">
+      <label><strong>Motivo de Consulta:</strong></label>
+      <p>{{ citaMedica.motivoConsulta }}</p>
+    </div>
+  </div>
+  
+  <div class="form-group-row">
+    <div class="form-group">
+      <label><strong>Fecha de la Cita:</strong></label>
+      <p>{{ citaMedica.fechaCita | date: 'yyyy-MM-dd' }}</p>
+    </div>
+    
+    <div class="form-group">
+      <label><strong>Hora de Inicio:</strong></label>
+      <p>{{ citaMedica.horaInicio }}</p>
+    </div>
+  </div>
+  
+  <div class="form-group-row">
+    <div class="form-group">
+      <label><strong>Hora de Fin:</strong></label>
+      <p>{{ citaMedica.horaFin }}</p>
+    </div>
+    
+    <div class="form-group">
+      <label><strong>Paciente:</strong></label>
+      <p>{{ nombrePaciente }}</p>
+    </div>
+  </div>
+  
+  <div class="form-group-row">
+    <div class="form-group">
+      <label><strong>Médico:</strong></label>
+      <p>{{ nombreMedico }}</p>
+    </div>
+  </div>
+  
+  <div class="text-end mt-3">
+    <button (click)="cerrarFormulario()" class="btn btn-secondary">Cerrar</button>
+  </div>
+</div>

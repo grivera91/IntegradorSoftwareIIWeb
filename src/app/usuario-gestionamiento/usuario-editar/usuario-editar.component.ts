@@ -75,7 +75,7 @@ export class UsuarioEditarComponent {
   guardarCambios(): void {
     // Forzar esAdmin solo si el rol es Administrador (9)
     this.usuarioRequest.esAdmin = this.usuarioRequest.rolUsuario === 9;
-
+    console.log(this.usuarioRequest);
     this.usuarioService.editarUsuario(this.usuario!.idUsuario, this.usuarioRequest).subscribe({
       next: () => {
         Swal.fire({

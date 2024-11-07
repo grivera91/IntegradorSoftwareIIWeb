@@ -44,20 +44,44 @@
 
   <!-- Formulario activo -->
   <ng-container *ngIf="formularioActivo">
+    <!-- Usuario -->
     <div class="formulario-content h-100" *ngIf="formularioActivo === 'registroUsuario'">
       <app-register-user (onClose)="cerrarFormulario()"></app-register-user>
     </div>
-
-    <div class="formulario-content h-100" *ngIf="formularioActivo === 'listaUsuarios'">
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'busquedaUsuarios'">
       <app-lista-usuarios (onClose)="cerrarFormulario()"></app-lista-usuarios>
     </div>
 
+    <!-- Medico -->
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'busquedaMedicos'">
+      <app-medico-busqueda (onClose)="cerrarFormulario()"></app-medico-busqueda>
+    </div>
+
+    <!-- Recepcionista -->
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'busquedaRecepcionistas'">
+      <app-recepcionista-busqueda (onClose)="cerrarFormulario()"></app-recepcionista-busqueda>
+    </div>
+
+    <!-- Paciente -->
     <div class="formulario-content h-100" *ngIf="formularioActivo === 'registroPaciente'">
       <app-registro-paciente (onClose)="cerrarFormulario()"></app-registro-paciente>
     </div>
-
-    <div class="formulario-content h-100" *ngIf="formularioActivo === 'listaPacientes'">
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'busquedaPacientes'">
       <app-lista-paciente (onClose)="cerrarFormulario()"></app-lista-paciente>
     </div>
+
+    <!-- Cita Medica -->
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'registroCitaMedica'">
+      <app-cita-medica-registro (onClose)="cerrarFormulario()"></app-cita-medica-registro>
+    </div>
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'busquedaCitaMedica'">
+      <app-cita-medica-busqueda (onClose)="cerrarFormulario()"></app-cita-medica-busqueda>
+    </div>
+
+    <!-- Paciente -->
+    <div class="formulario-content h-100" *ngIf="formularioActivo === 'perfilUsuario'">
+      <app-usuario-perfil (onClose)="cerrarFormulario()"></app-usuario-perfil>
+    </div>
+
   </ng-container>
 </div>

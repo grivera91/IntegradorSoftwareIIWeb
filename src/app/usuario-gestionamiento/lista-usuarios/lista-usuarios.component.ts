@@ -51,8 +51,11 @@ export class ListaUsuariosComponent implements OnInit {
   // Método para filtrar los usuarios por rol, admin y búsqueda por nombre
   filtrarUsuarios(): void {
     this.usuariosFiltrados = this.usuarios.filter(usuario => {
-      const coincideRol = this.filtroRol ? usuario.rolUsuario.toString() === this.filtroRol : true;
-      const coincideAdmin = this.filtroEsAdmin ? usuario.esAdmin.toString() === this.filtroEsAdmin : true;
+      const coincideRol = this.filtroRol ? usuario.rolUsuario?.toString() === this.filtroRol : true;
+      // const coincideAdmin = this.filtroEsAdmin ? usuario.esAdmin.toString() === this.filtroEsAdmin : true;
+      const coincideAdmin = this.filtroEsAdmin !== ''
+      ? usuario.esAdmin === (this.filtroEsAdmin === '1')
+      : true;
       const coincideBusqueda = this.filtroBusqueda
         ? usuario.nombre.toLowerCase().includes(this.filtroBusqueda.toLowerCase()) ||
           usuario.apellidoPaterno.toLowerCase().includes(this.filtroBusqueda.toLowerCase()) ||
@@ -64,10 +67,18 @@ export class ListaUsuariosComponent implements OnInit {
   }
 
   // Función para obtener el nombre del rol según el ID
-  obtenerNombreRol(rolId: number): string {
+  obtenerNombreRol(rolId: number | null | undefined): string {
+    // Si rolId es null o undefined, retornar 'Paciente'
+    if (rolId === null || rolId === undefined) {
+      return 'Paciente';
+    }
+    
+    // Buscar el nombre del rol en la lista de roles
     const rol = this.roles.find(r => r.id === rolId);
-    return rol ? rol.nombre : 'Desconocido';  // Si no encuentra el rol, devuelve 'Desconocido'
-  }
+    
+    // Si se encuentra el rol, retornar su nombre; si no, retornar 'Desconocido'
+    return rol ? rol.nombre : 'Desconocido';
+  }  
 
   editarUsuario(usuario: UsuarioRegistroResponse): void {
     this.usuarioSeleccionado = usuario;

@@ -83,14 +83,14 @@ export class PacienteEditarComponent {
       genero: pacienteUsuario.usuario.genero,
       numeroTelefonico: pacienteUsuario.usuario.numeroTelefonico,
       direccion: pacienteUsuario.usuario.direccion,
-      rolUsuario: pacienteUsuario.usuario.rolUsuario,
-      esAdmin: pacienteUsuario.usuario.rolUsuario === 9, // Internamente manejar si es admin
+      rolUsuario: pacienteUsuario.usuario.idUsuario,
+      esAdmin: pacienteUsuario.usuario.idUsuario === 9, // Internamente manejar si es admin
       usuarioModificacion: 'admin'
     };
 
     this.pacienteRequest = {
       ...this.pacienteRequest,
-      numeroHistoriaClinica: pacienteUsuario.paciente.numeroHistoriaClinica,
+      numeroHistoriaClinica: pacienteUsuario.paciente.codigoHistoriaClinica,
       idTipoSangre: pacienteUsuario.paciente.idTipoSangre,
       alergias: pacienteUsuario.paciente.alergias,
       enfermedadesPreexistentes: pacienteUsuario.paciente.enfermedadesPreexistentes,

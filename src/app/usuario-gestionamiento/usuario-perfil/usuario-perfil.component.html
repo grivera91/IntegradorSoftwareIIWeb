@@ -1,0 +1,101 @@
+<div class="container mt-4 form-container">
+  <!-- Información del Perfil -->
+  <h3 class="section-title mb-4">Perfil Usuario</h3>
+  
+  <!-- Información del Usuario -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">Código Usuario:</label>
+      <p class="data-value">{{ datosUsuario.codigoUsuario }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Nombre:</label>
+      <p class="data-value">{{ datosUsuario.nombre }}</p>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">Apellido Paterno:</label>
+      <p class="data-value">{{ datosUsuario.apellidoPaterno }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Apellido Materno:</label>
+      <p class="data-value">{{ datosUsuario.apellidoMaterno }}</p>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">DNI:</label>
+      <p class="data-value">{{ datosUsuario.dni }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Correo Electrónico:</label>
+      <p class="data-value">{{ datosUsuario.correoElectronico }}</p>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">Fecha de Nacimiento:</label>
+      <p class="data-value">{{ datosUsuario.fechaNacimiento | date: 'dd/MM/yyyy' }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Género:</label>
+      <p class="data-value">{{ obtenerNombreGenero(datosUsuario.genero) }}</p>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">Número Telefónico:</label>
+      <p class="data-value">{{ datosUsuario.numeroTelefonico }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Dirección:</label>
+      <p class="data-value">{{ datosUsuario.direccion }}</p>
+    </div>
+  </div>
+
+  <hr class="my-4">
+  
+  <!-- Información del Paciente -->
+  <!-- <h3 class="section-title mb-4">Información del Paciente</h3> -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">Código Paciente:</label>
+      <p class="data-value">{{ datosPaciente.codigoPaciente }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Código Historia Clínica:</label>
+      <p class="data-value">{{ datosPaciente.codigoHistoriaClinica }}</p>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">Tipo de Sangre:</label>
+      <p class="data-value">{{ obtenerTipoSangre(datosPaciente.idTipoSangre) }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Alergias:</label>
+      <p class="data-value">{{ datosPaciente.alergias }}</p>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">Enfermedades Preexistentes:</label>
+      <p class="data-value">{{ datosPaciente.enfermedadesPreexistentes }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Contacto de Emergencia:</label>
+      <p class="data-value">{{ datosPaciente.contactoEmergencia }}</p>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="label-title">Número Contacto de Emergencia:</label>
+      <p class="data-value">{{ datosPaciente.numeroContactoEmergencia }}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="label-title">Observaciones:</label>
+      <p class="data-value">{{ datosPaciente.observaciones }}</p>
+    </div>
+  </div>
+</div>

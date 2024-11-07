@@ -5,4 +5,5 @@ export interface AutenticacionResponse{
     usuarioAcceso: string;
     rolUsuario: number;
     esAdmin: boolean;
+    token: string;
 }

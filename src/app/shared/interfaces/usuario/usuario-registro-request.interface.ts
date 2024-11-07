@@ -8,9 +8,9 @@ export interface UsuarioRegistroRequest {
     genero: number;
     numeroTelefonico: string;
     direccion: string;
-    usuarioAcceso: string,
+    usuarioAcceso?: string,
     contrasenia: string;
-    rolUsuario: number;
+    rolUsuario?: number;
     esAdmin: boolean;
     usuarioCreacion: string;
   }

@@ -31,7 +31,7 @@
                 <tr *ngFor="let pacienteUsuario of pacienteUsuarioFiltrados">
                     <td>{{ pacienteUsuario.usuario.dni }}</td>
                     <td>{{ pacienteUsuario.usuario.nombre }} {{ pacienteUsuario.usuario.apellidoPaterno }} {{ pacienteUsuario.usuario.apellidoMaterno }}</td>
-                    <td>{{ pacienteUsuario.paciente.numeroHistoriaClinica }}</td>
+                    <td>{{ pacienteUsuario.paciente.codigoHistoriaClinica }}</td>
                     <td>{{ obtenerTipoSangre(pacienteUsuario.paciente.idTipoSangre) }}</td>
                     <td class="text-end">
                         <button class="btn btn-outline-primary btn-sm me-2" (click)="editarPaciente(pacienteUsuario)">

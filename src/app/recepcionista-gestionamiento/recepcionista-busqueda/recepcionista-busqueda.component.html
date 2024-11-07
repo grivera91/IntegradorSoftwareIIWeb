@@ -1,0 +1,59 @@
+  <div class="container mt-4 form-container">
+      <h3 class="mb-4" *ngIf="!usuarioRecepcionistaSeleccionado">Lista de Recepcionistas</h3>
+    
+      <div *ngIf="!usuarioRecepcionistaSeleccionado">
+        <!-- Filtro de búsqueda -->
+        <div class="row mb-4 align-items-center">
+          <div class="col-md-4">
+            <input 
+              type="text" 
+              id="filtroBusqueda" 
+              class="form-control filtro-input" 
+              [(ngModel)]="filtroBusqueda" 
+              (input)="filtrarRecepcionistas()" 
+              placeholder="Buscar por nombre, apellidos o DNI del recepcionista">
+          </div>
+        </div>
+    
+        <!-- Lista de médicos combinada -->
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>DNI</th>
+              <th>Nombre Completo del Usuario</th>
+              <th>Código Recepcionista</th>
+              <th>Departamento</th>
+              <th>Turno</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuarioRecepcionista of usuarioRecepcionistaFiltrados; trackBy: trackByUsuarioRecepcionista">
+              <td>{{ usuarioRecepcionista.dni }}</td>
+              <td>{{ usuarioRecepcionista.nombre }} {{ usuarioRecepcionista.apellidoPaterno }} {{ usuarioRecepcionista.apellidoMaterno }}</td>   
+              <td>{{ usuarioRecepcionista.recepcionista?.codigoRecepcionista }}</td>
+              <td>{{ usuarioRecepcionista.recepcionista?.departamento }}</td>
+              <td>{{ usuarioRecepcionista.recepcionista?.turno }}</td>
+              <td class="text-end">
+                <button *ngIf="usuarioRecepcionista.registrado" class="btn btn-outline-primary btn-sm me-2" (click)="editarMedico(usuarioRecepcionista)">
+                  <i class="bi bi-pencil"></i> Editar
+                </button>
+                <button *ngIf="!usuarioRecepcionista.registrado" class="btn btn-outline-primary btn-sm me-2" (click)="completarRegistroMedico(usuarioRecepcionista.idUsuario)">
+                  <i class="bi bi-plus"></i> Completar Registro
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    
+      <!-- Formulario de Edición o Registro de Médico -->
+      <div *ngIf="usuarioRecepcionistaSeleccionado">
+        <app-recepcionista-edicion 
+          [usuarioRecepcionista]="usuarioRecepcionistaSeleccionado" 
+          [mode]="mode" 
+          (onClose)="cerrarEdicion()">
+        </app-recepcionista-edicion>
+      </div>
+    </div>
+    

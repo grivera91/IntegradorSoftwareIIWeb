@@ -5,63 +5,145 @@
     <!-- Sección de Datos de Usuario -->
     <h4>Datos Paciente</h4>
     <div class="row mb-3">
+
+      <div class="col-md-6 position-relative">
+        <label for="dni" class="form-label">DNI</label>
+        <input
+          type="text"
+          id="dni"
+          class="form-control"
+          [(ngModel)]="dni"
+          name="dni"
+          required
+          maxlength="8"
+          (input)="onDniChange()"          
+          [ngClass]="{'is-invalid': registroForm.submitted && !dni}">
+        <div *ngIf="registroForm.submitted && !dni" class="invalid-feedback">
+          Este campo es obligatorio.
+        </div>
+      </div>
+
       <div class="col-md-6 position-relative">
         <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" id="nombre" class="form-control" [(ngModel)]="nombre" name="nombre" required [ngClass]="{'is-invalid': registroForm.submitted && !nombre}">
+        <input 
+          type="text" 
+          id="nombre" 
+          class="form-control" 
+          [(ngModel)]="nombre" 
+          name="nombre"
+          [disabled]="usuarioExistente"
+          required [ngClass]="{'is-invalid': registroForm.submitted && !nombre}">
         <div *ngIf="registroForm.submitted && !nombre" class="invalid-feedback">
           Este campo es obligatorio.
         </div>        
       </div>
+      
+    </div>
+
+    <div class="row mb-3">
 
       <div class="col-md-6 position-relative">
         <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
-        <input type="text" id="apellidoPaterno" class="form-control" [(ngModel)]="apellidoPaterno" name="apellidoPaterno" required [ngClass]="{'is-invalid': registroForm.submitted && !apellidoPaterno}">
+        <input 
+          type="text" 
+          id="apellidoPaterno" 
+          class="form-control" 
+          [(ngModel)]="apellidoPaterno" 
+          name="apellidoPaterno"
+          [disabled]="usuarioExistente"
+          required [ngClass]="{'is-invalid': registroForm.submitted && !apellidoPaterno}">
         <div *ngIf="registroForm.submitted && !apellidoPaterno" class="invalid-feedback">
           Este campo es obligatorio.
         </div>        
       </div>
-    </div>
 
-    <div class="row mb-3">
       <div class="col-md-6 position-relative">
         <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
-        <input type="text" id="apellidoMaterno" class="form-control" [(ngModel)]="apellidoMaterno" name="apellidoMaterno" required [ngClass]="{'is-invalid': registroForm.submitted && !apellidoMaterno}">
+        <input 
+          type="text" 
+          id="apellidoMaterno" 
+          class="form-control" 
+          [(ngModel)]="apellidoMaterno" 
+          name="apellidoMaterno" 
+          [disabled]="usuarioExistente"
+          required [ngClass]="{'is-invalid': registroForm.submitted && !apellidoMaterno}">
         <div *ngIf="registroForm.submitted && !apellidoMaterno" class="invalid-feedback">
           Este campo es obligatorio.
         </div>        
       </div>
-
-      <div class="col-md-6 position-relative">
-        <label for="dni" class="form-label">DNI</label>
-        <input type="number" id="dni" class="form-control" [(ngModel)]="dni" name="dni" required [ngClass]="{'is-invalid': registroForm.submitted && !dni}">
-        <div *ngIf="registroForm.submitted && !dni" class="invalid-feedback">
-          Este campo es obligatorio.
-        </div>        
-      </div>
+      
     </div>
 
     <div class="row mb-3">
       <div class="col-md-6 position-relative">
         <label for="correoElectronico" class="form-label">Correo Electrónico</label>
-        <input type="email" id="correoElectronico" class="form-control" [(ngModel)]="correoElectronico" name="correoElectronico" required [ngClass]="{'is-invalid': registroForm.submitted && !correoElectronico}">
+        <input 
+          type="email" 
+          id="correoElectronico" 
+          class="form-control" 
+          [(ngModel)]="correoElectronico" 
+          name="correoElectronico" 
+          [disabled]="usuarioExistente"
+          required [ngClass]="{'is-invalid': registroForm.submitted && !correoElectronico}">
         <div *ngIf="registroForm.submitted && !correoElectronico" class="invalid-feedback">
           Este campo es obligatorio.
         </div>        
       </div>
 
       <div class="col-md-6 position-relative">
-        <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-        <input type="date" id="fechaNacimiento" class="form-control" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" required [ngClass]="{'is-invalid': registroForm.submitted && !fechaNacimiento}">
-        <div *ngIf="registroForm.submitted && !fechaNacimiento" class="invalid-feedback">
+        <label for="contrasenia" class="form-label">Contraseña</label>
+        <input 
+          type="text" 
+          id="contrasenia" 
+          class="form-control" 
+          [(ngModel)]="contrasenia" 
+          name="contrasenia"
+          [disabled]="usuarioExistente"
+          required 
+          [ngClass]="{'is-invalid': registroForm.submitted && !contrasenia && !usuarioExistente}">
+        <div *ngIf="registroForm.submitted && !contrasenia && !usuarioExistente" class="invalid-feedback">
+          Este campo es obligatorio.
+        </div>        
+      </div>      
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6 position-relative">
+        <label for="confirmarContrasenia" class="form-label">Confirmar Contraseña</label>
+        <input 
+          type="text" 
+          id="confirmarContrasenia" 
+          class="form-control" 
+          [(ngModel)]="confirmarContrasenia" 
+          name="confirmarContrasenia"
+          [disabled]="usuarioExistente"
+          required 
+          [ngClass]="{'is-invalid': registroForm.submitted && !confirmarContrasenia && !usuarioExistente}">
+          <div *ngIf="registroForm.submitted && !confirmarContrasenia && !usuarioExistente" class="text-danger">
           Este campo es obligatorio.
         </div>        
       </div>
+
+      <div class="col-md-6 position-relative">
+        <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+        <input 
+          type="date" 
+          id="fechaNacimiento" 
+          class="form-control" 
+          [(ngModel)]="fechaNacimiento" 
+          name="fechaNacimiento"
+          [disabled]="usuarioExistente"
+          required [ngClass]="{'is-invalid': registroForm.submitted && !fechaNacimiento}">
+        <div *ngIf="registroForm.submitted && !fechaNacimiento" class="invalid-feedback">
+          Este campo es obligatorio.
+        </div>        
+      </div>      
     </div>
 
     <div class="row mb-3">
       <div class="col-md-6 position-relative">
         <label for="genero" class="form-label">Género</label>
-        <select id="genero" class="form-select" [(ngModel)]="genero" name="genero" required [ngClass]="{'is-invalid': registroForm.submitted && !genero}">
+        <select id="genero" class="form-select" [(ngModel)]="genero" name="genero" [disabled]="usuarioExistente" required [ngClass]="{'is-invalid': registroForm.submitted && !genero}">
           <option value="">Seleccionar Género</option>
           <option *ngFor="let genero of generos" [value]="genero.id">{{ genero.nombre }}</option>
         </select>
@@ -72,47 +154,43 @@
 
       <div class="col-md-6 position-relative">
         <label for="numeroTelefonico" class="form-label">Número Telefónico</label>
-        <input type="number" id="numeroTelefonico" class="form-control" [(ngModel)]="numeroTelefonico" name="numeroTelefonico" required [ngClass]="{'is-invalid': registroForm.submitted && !numeroTelefonico}">
+        <input 
+          type="number" 
+          id="numeroTelefonico" 
+          class="form-control" 
+          [(ngModel)]="numeroTelefonico" 
+          name="numeroTelefonico" 
+          [disabled]="usuarioExistente"
+          required [ngClass]="{'is-invalid': registroForm.submitted && !numeroTelefonico}">
         <div *ngIf="registroForm.submitted && !numeroTelefonico" class="invalid-feedback">
           Este campo es obligatorio.
         </div>        
-      </div>
-    </div>
+      </div>      
 
-    <div class="row mb-3">
-      <div class="col-md-6 position-relative">
-        <label for="direccion" class="form-label">Dirección</label>
-        <input type="text" id="direccion" class="form-control" [(ngModel)]="direccion" name="direccion" required [ngClass]="{'is-invalid': registroForm.submitted && !direccion}">
-        <div *ngIf="registroForm.submitted && !direccion" class="invalid-feedback">
-          Este campo es obligatorio.
-        </div>
-      </div>
-
-      <div class="col-md-6 position-relative">
+      <!-- <div class="col-md-6 position-relative">
         <label for="usuarioAcceso" class="form-label">Usuario de Acceso</label>
         <input type="text" id="usuarioAcceso" class="form-control" [(ngModel)]="usuarioAcceso" name="usuarioAcceso" required [ngClass]="{'is-invalid': registroForm.submitted && !usuarioAcceso}">
         <div *ngIf="registroForm.submitted && !usuarioAcceso" class="invalid-feedback">
           Este campo es obligatorio.
         </div>        
-      </div>
+      </div> -->      
     </div>
 
     <div class="row mb-3">
       <div class="col-md-6 position-relative">
-        <label for="contrasenia" class="form-label">Contraseña</label>
-        <input type="text" id="contrasenia" class="form-control" [(ngModel)]="contrasenia" name="contrasenia" required [ngClass]="{'is-invalid': registroForm.submitted && !contrasenia}">
-        <div *ngIf="registroForm.submitted && !contrasenia" class="invalid-feedback">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input 
+          type="text" 
+          id="direccion" 
+          class="form-control" 
+          [(ngModel)]="direccion" 
+          name="direccion"
+          [disabled]="usuarioExistente"
+          required [ngClass]="{'is-invalid': registroForm.submitted && !direccion}">
+        <div *ngIf="registroForm.submitted && !direccion" class="invalid-feedback">
           Este campo es obligatorio.
-        </div>        
-      </div>
-
-      <div class="col-md-6 position-relative">
-        <label for="confirmarContrasenia" class="form-label">Confirmar Contraseña</label>
-        <input type="text" id="confirmarContrasenia" class="form-control" [(ngModel)]="confirmarContrasenia" name="confirmarContrasenia" required [ngClass]="{'is-invalid': registroForm.submitted && !confirmarContrasenia}">
-        <div *ngIf="registroForm.submitted && !confirmarContrasenia" class="text-danger">
-          Este campo es obligatorio.
-        </div>        
-      </div>
+        </div>
+      </div>      
     </div>
 
     <!-- Sección de Datos del Paciente -->
@@ -158,18 +236,11 @@
         <label for="observaciones" class="form-label">Observaciones</label>
         <textarea id="observaciones" class="form-control" rows="4" [(ngModel)]="observaciones" name="observaciones"></textarea>
       </div>
-    </div>
-
-    <div class="row mb-3">      
-      <div class="col-md-6">
-        <label for="numeroHistoriaClinica" class="form-label">Numero de Historia Clinica</label>
-        <input type="text" id="numeroHistoriaClinica" class="form-control" [(ngModel)]="numeroHistoriaClinica" name="numeroHistoriaClinica" required [ngClass]="{'is-invalid': registroForm.submitted && !numeroHistoriaClinica}">
-      </div>
-    </div>
+    </div>    
 
     <!-- Botones de acción -->
     <div class="d-flex justify-content-between w-100 botones-con-margen">
-      <button type="submit" class="btn btn-primary flex-grow-1 mx-2">Registrar</button>
+      <button type="submit" class="btn btn-primary flex-grow-1 mx-2" [disabled]="registroForm.invalid" >Registrar</button>
       <button type="reset" class="btn btn-secondary flex-grow-1 mx-2">Limpiar</button>
       <button type="button" class="btn btn-danger flex-grow-1 mx-2" (click)="cancelar()">Cancelar</button>
     </div>

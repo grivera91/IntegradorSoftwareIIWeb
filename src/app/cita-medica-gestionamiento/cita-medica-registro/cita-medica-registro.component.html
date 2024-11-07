@@ -1,0 +1,68 @@
+
+<!-- registrar-cita-medica.component.html -->
+<div class="container mt-4">
+  <h2>Registrar Cita Médica</h2>
+  <form [formGroup]="citaForm" (ngSubmit)="registrarCita()">
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="idPaciente">Paciente</label>
+          <select id="idPaciente" formControlName="idPaciente" class="form-control">
+            <option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.nombre }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="idMedico">Médico</label>
+          <select id="idMedico" formControlName="idMedico" class="form-control">
+            <option *ngFor="let medico of medicos" [value]="medico.id">{{ medico.nombre }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="fechaCita">Fecha de la Cita</label>
+          <input type="date" id="fechaCita" formControlName="fechaCita" class="form-control" />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Hora de Inicio</label>
+          <select formControlName="horaInicio" class="form-control">
+            <option value="">Seleccione una hora</option>
+            <option *ngFor="let hour of predefinedHours" [value]="hour">{{ hour }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Hora de Fin</label>
+          <select formControlName="horaFin" class="form-control">
+            <option value="">Seleccione una hora</option>
+            <option *ngFor="let hour of predefinedHours" [value]="hour">{{ hour }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="motivoConsulta">Motivo de la Consulta</label>
+          <textarea id="motivoConsulta" formControlName="motivoConsulta" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="citaForm.invalid">Registrar Cita</button>
+      </div>
+    </div>
+  </form>
+</div>

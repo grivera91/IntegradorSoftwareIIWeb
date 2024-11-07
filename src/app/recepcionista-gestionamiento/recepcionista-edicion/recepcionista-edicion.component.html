@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <h4>{{ mode === 'create' ? 'Completar Registro de Recepcionista' : 'Editar Recepcionista' }}</h4>
+
+  <!-- Información Básica del Usuario (Solo Lectura) -->
+  <div class="row">
+    <div class="col-md-6 form-group mb-3">
+        <label for="nombreUsuario">Nombre Completo</label>
+        <input id="nombreUsuario" type="text" class="form-control" [value]="usuarioRecepcionista.nombre + ' ' + usuarioRecepcionista.apellidoPaterno + ' ' + usuarioRecepcionista.apellidoMaterno" disabled />
+    </div>
+    <div class="col-md-6 form-group mb-3">
+        <label for="dniUsuario">DNI</label>
+        <input id="dniUsuario" type="text" class="form-control" [value]="usuarioRecepcionista.dni" disabled />
+    </div>
+    <div class="col-md-6 form-group mb-3">
+        <label for="correoUsuario">Correo Electrónico</label>
+        <input id="correoUsuario" type="email" class="form-control" [value]="usuarioRecepcionista.correoElectronico" disabled />
+    </div>
+    <div class="col-md-6 form-group mb-3">
+        <label for="telefonoUsuario">Teléfono</label>
+        <input id="telefonoUsuario" type="text" class="form-control" [value]="usuarioRecepcionista.numeroTelefonico" disabled />
+    </div>
+</div>
+
+  <!-- Formulario de Registro/Edición -->
+  <form [formGroup]="recepcionistaForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6 form-group mb-3">
+        <label>Fecha de Contratación</label>
+        <input type="date" formControlName="fechaContratacion" class="form-control" />
+      </div>
+      <div class="col-md-6 form-group mb-3">
+               
+        <label for="turno">Turno</label>
+        <select id="turno" formControlName="turno" class="form-control" [ngClass]="{ 'is-invalid': recepcionistaForm.get('turno')?.touched && recepcionistaForm.get('turno')?.invalid }">
+            <option value="">Seleccione una especialidad</option>
+            <option *ngFor="let turno of turnos" [value]="turno">{{ turno }}</option>
+        </select>
+        <div *ngIf="recepcionistaForm.get('turno')?.touched && recepcionistaForm.get('turno')?.invalid" class="invalid-feedback">
+            El turno es obligatorio.
+        </div>
+
+      </div>
+      <div class="col-md-6 form-group mb-3">
+        <label for="departamento">Departamento</label>
+        <select id="departamento" formControlName="departamento" class="form-control" [ngClass]="{ 'is-invalid': recepcionistaForm.get('departamento')?.touched && recepcionistaForm.get('departamento')?.invalid }">
+            <option value="">Seleccione un departamento</option>
+            <option *ngFor="let departamento of departamentos" [value]="departamento">{{ departamento }}</option>
+        </select>
+        <div *ngIf="recepcionistaForm.get('departamento')?.touched && recepcionistaForm.get('departamento')?.invalid" class="invalid-feedback">
+            El departamento es obligatorio.
+        </div>
+
+      </div>          
+    </div>
+
+    <div class="d-flex justify-content-end mt-4">
+      <button type="button" class="btn btn-secondary me-2" (click)="cerrarFormulario()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">
+        {{ mode === 'create' ? 'Completar Registro' : 'Guardar Cambios' }}
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+<div class="container mt-4 form-container">
+  <h3 class="mb-4" *ngIf="!usuarioMedicoSeleccionado">Lista de Médicos</h3>
+
+  <div *ngIf="!usuarioMedicoSeleccionado">
+    <!-- Filtro de búsqueda -->
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-4">
+        <input 
+          type="text" 
+          id="filtroBusqueda" 
+          class="form-control filtro-input" 
+          [(ngModel)]="filtroBusqueda" 
+          (input)="filtrarMedicos()" 
+          placeholder="Buscar por nombre, apellidos o DNI del médico">
+      </div>
+    </div>
+
+    <!-- Lista de médicos combinada -->
+    <table class="table table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>DNI</th>
+          <th>Nombre Completo del Usuario</th>
+          <th>Código Medico</th>
+          <th>Número Colegiatura</th>
+          <th>Especialidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuarioMedico of usuarioMedicoFiltrados">
+          <td>{{ usuarioMedico.dni }}</td>
+          <td>{{ usuarioMedico.nombre }} {{ usuarioMedico.apellidoPaterno }} {{ usuarioMedico.apellidoMaterno }}</td>   
+          <td>{{ usuarioMedico.medico?.codigoMedico }}</td>
+          <td>{{ usuarioMedico.medico?.numeroColegiatura }}</td>
+          <td>{{ usuarioMedico.medico?.especialidad }}</td>
+          <td class="text-end">
+            <button *ngIf="usuarioMedico.registrado" class="btn btn-outline-primary btn-sm me-2" (click)="editarMedico(usuarioMedico)">
+              <i class="bi bi-pencil"></i> Editar
+            </button>
+            <button *ngIf="!usuarioMedico.registrado" class="btn btn-outline-primary btn-sm me-2" (click)="completarRegistroMedico(usuarioMedico.idUsuario)">
+              <i class="bi bi-plus"></i> Completar Registro
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulario de Edición o Registro de Médico -->
+  <div *ngIf="usuarioMedicoSeleccionado">
+    <app-medico-edicion 
+      [usuarioMedico]="usuarioMedicoSeleccionado" 
+      [mode]="mode" 
+      (onClose)="cerrarEdicion()">
+    </app-medico-edicion>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="container mt-4 form-container">
+    <h3 class="mb-4" *ngIf="!citaSeleccionada">Lista de Citas Médicas</h3>
+  
+    <div *ngIf="!citaSeleccionada">
+      <!-- Filtro de búsqueda -->
+      <div class="row mb-4 align-items-center">
+        <div class="col-md-4">
+          <input 
+            type="text" 
+            id="filtroBusqueda" 
+            class="form-control filtro-input" 
+            [(ngModel)]="filtroBusqueda" 
+            (input)="filtrarCitas()" 
+            placeholder="Buscar por código, motivo de consulta o fecha">
+        </div>
+      </div>
+  
+      <!-- Lista de citas médicas -->
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Código de Cita</th>
+            <th>Motivo de Consulta</th>
+            <th>Fecha de la Cita</th>
+            <th>Hora de Inicio</th>
+            <th>Hora de Fin</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of citasFiltradas">
+            <td>{{ cita.codigoCitaMedica }}</td>
+            <td>{{ cita.motivoConsulta }}</td>
+            <td>{{ cita.fechaCita | date:'yyyy-MM-dd' }}</td>
+            <td>{{ cita.horaInicio }}</td>
+            <td>{{ cita.horaFin }}</td>
+            <td class="text-end">
+              <button class="btn btn-outline-primary btn-sm me-2" (click)="verDetalleCita(cita)">
+                <i class="bi bi-eye"></i> Ver Detalle
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Detalle de la Cita Médica -->
+    <div *ngIf="citaSeleccionada">
+      <app-cita-medica-edicion 
+        [citaMedica]="citaSeleccionada" 
+        (onClose)="cerrarDetalle()">
+      </app-cita-medica-edicion>
+    </div>
+  </div>
+  

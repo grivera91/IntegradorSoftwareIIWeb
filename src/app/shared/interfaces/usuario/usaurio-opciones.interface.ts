@@ -2,8 +2,7 @@ export class OpcionesUsuarios {
     // Lista de roles
     static readonly roles = [
       { id: 1, nombre: 'Recepcionista' },
-      { id: 2, nombre: 'Médico' },
-      { id: 3, nombre: 'Paciente' },
+      { id: 2, nombre: 'Médico' },      
       { id: 9, nombre: 'Administrador' }
     ];
   

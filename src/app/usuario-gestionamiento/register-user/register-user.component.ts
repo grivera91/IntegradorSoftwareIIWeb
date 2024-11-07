@@ -108,7 +108,7 @@ export class RegisterUserComponent {
       usuarioAcceso: this.usuarioAcceso,
       contrasenia: this.contrasenia,
       rolUsuario: parseInt(this.rolUsuario, 10),
-      esAdmin: this.esAdmin,  // Se envía internamente sin mostrar al usuario
+      esAdmin: this.esAdmin,
       usuarioCreacion: 'admin'
     };
 

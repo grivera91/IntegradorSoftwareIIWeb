@@ -68,22 +68,11 @@
                 <input type="text" id="direccion" [(ngModel)]="usuarioRequest.direccion" name="direccion" class="form-control">
             </div>
 
-            <!-- Rol de Usuario -->
-            <div class="col-md-6 mb-3">
-                <label for="rolUsuario" class="form-label">Rol de Usuario</label>
-                <select id="rolUsuario" [(ngModel)]="usuarioRequest.rolUsuario" name="rolUsuario" class="form-select">
-                    <option value="">Seleccionar Rol</option>
-                    <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row">
             <!-- Contraseña -->
             <div class="col-md-6 mb-3">
                 <label for="contrasenia" class="form-label">Nueva Contraseña (opcional)</label>
                 <input type="password" id="contrasenia" [(ngModel)]="usuarioRequest.contrasenia" name="contrasenia" class="form-control" placeholder="Ingresa nueva contraseña si deseas cambiarla">
-            </div>
+            </div>            
         </div>
 
         <hr>

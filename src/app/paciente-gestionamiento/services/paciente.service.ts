@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { PacienteRegistroRequest } from '../../shared/interfaces/paciente/paciente-registro-request.interface';
 import { PacienteRegistroResponse } from '../../shared/interfaces/paciente/paciente-registro-response.interface';
 import { PacienteEditRequest } from '../../shared/interfaces/paciente/paciente-editar-request.interface';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,13 @@ export class PacienteService {
   }
 
   obtenerPacientes(): Observable<PacienteRegistroResponse[]> {    
-    return this.http.get<PacienteRegistroResponse[]>(`${this.BASE_PACIENTE_URL}/listar`)
+    return this.http.get<PacienteRegistroResponse[]>(`${this.BASE_PACIENTE_URL}`)
       .pipe(catchError(this.handleError));
+  }
+
+  obtenerPaciente(idPaciente: number): Observable<PacienteRegistroResponse> {
+    const url = `${this.BASE_PACIENTE_URL}/${idPaciente}`;
+    return this.http.get<PacienteRegistroResponse>(url);
   }
 
   editarPaciente(idPaciente: number, paciente: PacienteEditRequest): Observable<void> {

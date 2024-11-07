@@ -9,7 +9,7 @@ export interface UsuarioEditarRequest {
     numeroTelefonico: string;
     direccion: string;    
     contrasenia?: string; // Contraseña es opcional en la edición
-    rolUsuario: number;
+    rolUsuario?: number;
     esAdmin: boolean;    
     usuarioModificacion: string;
   }

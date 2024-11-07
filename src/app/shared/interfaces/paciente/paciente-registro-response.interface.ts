@@ -1,7 +1,8 @@
 export interface PacienteRegistroResponse{
     idPaciente: number,
     idUsuario: number,
-    numeroHistoriaClinica: string,
+    codigoPaciente: string,   
+    codigoHistoriaClinica: string,
     idTipoSangre: number,
     alergias: string,
     enfermedadesPreexistentes: string,

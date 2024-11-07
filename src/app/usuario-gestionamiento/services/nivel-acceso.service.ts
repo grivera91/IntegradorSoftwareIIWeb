@@ -1,28 +1,33 @@
-// nivel-acceso.service.ts
+// permisos.service.ts
 import { Injectable } from '@angular/core';
-import { RolesUsuario } from '../../shared/enums/roles.enum';
+import { AccionesPorCategoria, AccionesPorRol } from '../../shared/interfaces/usuario/acciones-permisos.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PermisosService {
-  private accionesPorRol: { [key: string]: any } = {
-    [RolesUsuario.ADMINISTRADOR]: {
-      Usuarios: ['registroUsuario', 'listaUsuarios'],
-      Pacientes: ['registroPaciente', 'listaPacientes'],
+  private accionesPorRol: AccionesPorRol = {
+    ADMINISTRADOR: {
+      Usuarios: ['registroUsuario', 'busquedaUsuarios'],
+      Médicos: ['busquedaMedicos'],
+      Pacientes: ['registroPaciente', 'busquedaPacientes'],
+      Recepcionistas:['busquedaRecepcionistas'],
+      CitaMedica: ['registroCitaMedica', 'busquedaCitaMedica']
     },
-    [RolesUsuario.RECEPCIONISTA]: {
-      Pacientes: ['registroPaciente','listaPacientes'],
+    RECEPCIONISTA: {
+      Pacientes: ['registroPaciente', 'busquedaPacientes'],
+      CitaMedica: ['registroCitaMedica', 'busquedaCitaMedica']
     },
-    // Otros roles según el caso
+    MEDICO: {
+      Pacientes: ['busquedaPaciente'],
+    },
+    PACIENTE: {
+      Usuario: ['perfilUsuario']        
+    }
   };
 
   // Método que devuelve las acciones disponibles organizadas por categorías
-  getAccionesDisponibles(rolUsuario: number, esAdmin: boolean): any {
-    if (esAdmin && rolUsuario === RolesUsuario.ADMINISTRADOR) {
-      return this.accionesPorRol[RolesUsuario.ADMINISTRADOR];
-    }
-
+  getAccionesDisponibles(rolUsuario: string): AccionesPorCategoria {
     return this.accionesPorRol[rolUsuario] || {};
   }
 }
