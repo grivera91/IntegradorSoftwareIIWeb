@@ -91,7 +91,11 @@ export class UsuarioService {
       .pipe(catchError(this.handleError));
   } 
 
-  
+  obtenerUsuariosMedicosEspecialidad(idEspecialidad: number): Observable<UsuarioMedicoResponseDto[]>{
+    const url = `${this.BASE_USUARIO_URL}/usuarioMedicoEspecialidad/${idEspecialidad}`;
+    return this.http.get<UsuarioMedicoResponseDto[]>(url)
+      .pipe(catchError(this.handleError));
+  }  
 
   // Manejo centralizado de errores
   private handleError(error: HttpErrorResponse): Observable<never> {

@@ -33,7 +33,7 @@
           <td>{{ usuarioMedico.nombre }} {{ usuarioMedico.apellidoPaterno }} {{ usuarioMedico.apellidoMaterno }}</td>   
           <td>{{ usuarioMedico.medico?.codigoMedico }}</td>
           <td>{{ usuarioMedico.medico?.numeroColegiatura }}</td>
-          <td>{{ usuarioMedico.medico?.especialidad }}</td>
+          <td>{{ obtenerDescripcionEspecialidad(usuarioMedico.medico?.idEspecialidad) }}</td>
           <td class="text-end">
             <button *ngIf="usuarioMedico.registrado" class="btn btn-outline-primary btn-sm me-2" (click)="editarMedico(usuarioMedico)">
               <i class="bi bi-pencil"></i> Editar

@@ -2,26 +2,26 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { CitaMedicaRegistroRequest } from '../../shared/interfaces/cita-medica/citaMedica-registro-request.interface';
-import { CitaMedicaRegistroResponse } from '../../shared/interfaces/cita-medica/citaMedica-registro-response.interface';
+import { PagoRequest } from '../../shared/interfaces/cita-medica/pago-registro-request.interface';
+import { PagoResponse } from '../../shared/interfaces/cita-medica/pago-registro.response.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CitaMedicaService {
+export class PagoService {
 
-  private BASE_CITAMEDICA_URL = environment.apiUrls.citaMedica;
+  private BASE_PAGO_URL = environment.apiUrls.pago;
 
   constructor(private http: HttpClient) { }
 
-  registrarCitaMedica(request: CitaMedicaRegistroRequest): Observable<CitaMedicaRegistroResponse>{
-    return this.http.post<CitaMedicaRegistroResponse>(`${this.BASE_CITAMEDICA_URL}`, request)
+  registrarPago(request: PagoRequest): Observable<PagoResponse>{
+    return this.http.post<PagoResponse>(`${this.BASE_PAGO_URL}`, request)
       .pipe(catchError(this.handleError));
   }
 
-  obtenerCitasMedicas():Observable<CitaMedicaRegistroResponse[]>{
+  obtenerPago(idPago: number):Observable<PagoResponse>{
     let params = new HttpParams();
-    return this.http.get<CitaMedicaRegistroResponse[]>(`${this.BASE_CITAMEDICA_URL}`, {params})
+    return this.http.get<PagoResponse>(`${this.BASE_PAGO_URL}`)
       .pipe(catchError(this.handleError));
   }
 
@@ -49,5 +49,4 @@ export class CitaMedicaService {
     console.error('Error capturado:', errorMessage);
     return throwError(() => new Error(errorMessage));
   }
-  
 }

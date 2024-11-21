@@ -1,10 +1,19 @@
 export interface CitaMedicaRegistroResponse{
-    idCitaMedica: number,   
+    idCitaMedica: number, 
+    idEspecialidad: number,  
     idPaciente: number;
     idMedico: number;
     codigoCitaMedica: string,
-    fechaCita: string; // Utiliza string para las fechas en el formato ISO
-    horaInicio: string; // Utiliza string para representar TimeSpan
-    horaFin: string; // Utiliza string para representar TimeSpan
+    fechaCita: string;
+    idHorario: number;    
     motivoConsulta: string;    
+    estadoCita: string;
+
+    idTipoPago: number;
+    importeNeto: number;
+    impuesto: number;
+    importeTotal: number;
+    fechaPago: string;
+    moneda: string;
+    codigoTranssaccion: string;
 }

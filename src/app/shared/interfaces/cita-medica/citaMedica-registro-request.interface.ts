@@ -1,10 +1,12 @@
 export interface CitaMedicaRegistroRequest{
+    idEspecialidad: number;
     idPaciente: number;
     idMedico: number;
-    fechaCita: string; // Utiliza string para las fechas en el formato ISO
-    horaInicio: string; // Utiliza string para representar TimeSpan
-    horaFin: string; // Utiliza string para representar TimeSpan
+    fechaCita: string;
+    idHorario: number;
     motivoConsulta: string;
+    idTipoPago: number;
+    importeTotal: number;
     usuarioCreacion: string;
-    usuarioModificacion?: string; // Campo opcional        
+    usuarioModificacion?: string; 
 }

@@ -7,5 +7,7 @@ export const environment = {
       medico: 'http://44.222.6.75:5003/api/Medico',
       recepcionista: 'http://44.222.6.75:5004/api/Recepcionista',
       citaMedica: 'http://44.222.6.75:5005/api/CitaMedica',
+      parametro: 'http://44.222.6.75:5005/api/Parametro',
+      pago: 'http://44.222.6.75:5005/api/Pago',
     }
   };

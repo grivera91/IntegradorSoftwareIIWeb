@@ -19,7 +19,8 @@ export class PermisosService {
       CitaMedica: ['registroCitaMedica', 'busquedaCitaMedica']
     },
     MEDICO: {
-      Pacientes: ['busquedaPaciente'],
+      Pacientes: ['busquedaPacientes'],
+      CitaMedica: ['busquedaCitaMedica'],
     },
     PACIENTE: {
       Usuario: ['perfilUsuario']        

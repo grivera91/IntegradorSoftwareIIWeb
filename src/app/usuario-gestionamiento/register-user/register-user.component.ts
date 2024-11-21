@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';  // Para ngModel
-import { CommonModule } from '@angular/common';  // Importa CommonModule para ngIf, ngFor, etc.
+import { CommonModule, formatDate } from '@angular/common';  // Importa CommonModule para ngIf, ngFor, etc.
 import { UsuarioService } from '../services/usuario.service';
 import { UsuarioResumenComponent } from '../usuario-resumen/usuario-resumen.component';
 import { OpcionesUsuarios } from '../../shared/interfaces/usuario/usaurio-opciones.interface';  // Importa las opciones centralizadas
@@ -39,7 +39,12 @@ export class RegisterUserComponent {
   roles = OpcionesUsuarios.roles;
   generos = OpcionesUsuarios.generos;
 
-  constructor(private usuarioService: UsuarioService) {}
+  fechaActual: string;
+
+  constructor(private usuarioService: UsuarioService) {
+    this.fechaActual = formatDate(new Date(), 'yyyy-MM-dd', 'en');    
+
+  }
 
   // Método para cambiar el estado de esAdmin según el rol seleccionado
   onRoleChange(): void {

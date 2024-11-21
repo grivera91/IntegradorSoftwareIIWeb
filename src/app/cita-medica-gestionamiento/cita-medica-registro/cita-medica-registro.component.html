@@ -1,67 +1,237 @@
-
-<!-- registrar-cita-medica.component.html -->
+<!-- Template HTML -->
 <div class="container mt-4">
   <h2>Registrar Cita Médica</h2>
   <form [formGroup]="citaForm" (ngSubmit)="registrarCita()">
-    
+  
+    <!-- Especialidad -->
+    <div class="form-group">
+      <label for="idEspecialidad">Especialidad</label>
+      <select 
+        id="idEspecialidad" 
+        formControlName="idEspecialidad" 
+        class="form-control" 
+        (change)="onEspecialidadChange($event)"
+        [ngClass]="{'is-invalid': citaForm.get('idEspecialidad')?.invalid && citaForm.get('idEspecialidad')?.touched}">
+        <option value="">Seleccione una Especialidad</option>
+        <option *ngFor="let especialidad of especialidades" [value]="especialidad.idEspecialidad">
+          {{ especialidad.descripcionEspecialidad }}
+        </option>
+      </select>
+      <div *ngIf="citaForm.get('idEspecialidad')?.invalid && citaForm.get('idEspecialidad')?.touched" class="invalid-feedback">
+        Por favor, seleccione una especialidad.
+      </div>
+    </div>
+
+    <!-- Médico -->
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="idPaciente">Paciente</label>
-          <select id="idPaciente" formControlName="idPaciente" class="form-control">
-            <option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.nombre }}</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
           <label for="idMedico">Médico</label>
-          <select id="idMedico" formControlName="idMedico" class="form-control">
+          <select 
+            id="idMedico" 
+            formControlName="idMedico" 
+            class="form-control"
+            [ngClass]="{'is-invalid': citaForm.get('idMedico')?.invalid && citaForm.get('idMedico')?.touched}">
+            <option value="">Seleccione un Médico</option>
             <option *ngFor="let medico of medicos" [value]="medico.id">{{ medico.nombre }}</option>
           </select>
+          <div *ngIf="citaForm.get('idMedico')?.invalid && citaForm.get('idMedico')?.touched" class="invalid-feedback">
+            Por favor, seleccione un médico.
+          </div>
+        </div>
+      </div>
+
+      <!-- Paciente -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="idPaciente">Paciente</label>
+          <select 
+            id="idPaciente" 
+            formControlName="idPaciente" 
+            class="form-control"
+            [ngClass]="{'is-invalid': citaForm.get('idPaciente')?.invalid && citaForm.get('idPaciente')?.touched}">
+            <option value="">Seleccione un Paciente</option>
+            <option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.nombre }}</option>
+          </select>
+          <div *ngIf="citaForm.get('idPaciente')?.invalid && citaForm.get('idPaciente')?.touched" class="invalid-feedback">
+            Por favor, seleccione un paciente.
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Fecha y Horario -->
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
           <label for="fechaCita">Fecha de la Cita</label>
-          <input type="date" id="fechaCita" formControlName="fechaCita" class="form-control" />
+          <input 
+            type="date" 
+            id="fechaCita" 
+            formControlName="fechaCita" 
+            class="form-control"
+            [min]="fechaMinima"
+            [ngClass]="{'is-invalid': citaForm.get('fechaCita')?.invalid && citaForm.get('fechaCita')?.touched}">
+          <div *ngIf="citaForm.get('fechaCita')?.invalid && citaForm.get('fechaCita')?.touched" class="invalid-feedback">
+            Por favor, seleccione una fecha válida (hoy o posterior).
+          </div>
         </div>
+        
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
         <div class="form-group">
-          <label>Hora de Inicio</label>
-          <select formControlName="horaInicio" class="form-control">
-            <option value="">Seleccione una hora</option>
-            <option *ngFor="let hour of predefinedHours" [value]="hour">{{ hour }}</option>
+          <label for="idHorario">Hora de la Cita</label>
+          <select 
+            id="idHorario" 
+            formControlName="idHorario" 
+            class="form-control"
+            [ngClass]="{'is-invalid': citaForm.get('idHorario')?.invalid && citaForm.get('idHorario')?.touched}">
+            <option value="">Seleccione un horario</option>
+            <option *ngFor="let horario of horarios" [value]="horario.idHorario">{{ horario.descripcionHorario }}</option>
           </select>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>Hora de Fin</label>
-          <select formControlName="horaFin" class="form-control">
-            <option value="">Seleccione una hora</option>
-            <option *ngFor="let hour of predefinedHours" [value]="hour">{{ hour }}</option>
-          </select>
+          <div *ngIf="citaForm.get('idHorario')?.invalid && citaForm.get('idHorario')?.touched" class="invalid-feedback">
+            Por favor, seleccione un horario.
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Motivo de Consulta -->
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <label for="motivoConsulta">Motivo de la Consulta</label>
-          <textarea id="motivoConsulta" formControlName="motivoConsulta" class="form-control" rows="3"></textarea>
+          <textarea 
+            id="motivoConsulta" 
+            formControlName="motivoConsulta" 
+            class="form-control" 
+            rows="3"
+            [ngClass]="{'is-invalid': citaForm.get('motivoConsulta')?.invalid && citaForm.get('motivoConsulta')?.touched}">
+          </textarea>
+          <div *ngIf="citaForm.get('motivoConsulta')?.invalid && citaForm.get('motivoConsulta')?.touched" class="invalid-feedback">
+            Por favor, ingrese un motivo válido (máximo 255 caracteres).
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Tipo de Pago -->
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="idTipoPago">Tipo de pago</label>
+        <select 
+          id="idTipoPago" 
+          formControlName="idTipoPago" 
+          class="form-control"
+          (change)="onTipoPagoChange($event)"
+          [ngClass]="{'is-invalid': citaForm.get('idTipoPago')?.invalid && citaForm.get('idTipoPago')?.touched}">
+          <option value="">Seleccione un tipo de pago</option>
+          <option *ngFor="let tipoPago of tipoPagos" [value]="tipoPago.idTipoPago">{{ tipoPago.descripcionTipoPago }}</option>
+        </select>
+        <div *ngIf="citaForm.get('idTipoPago')?.invalid && citaForm.get('idTipoPago')?.touched" class="invalid-feedback">
+          Por favor, seleccione un tipo de pago.
+        </div>
+      </div>
+    </div>
+
+    <!-- Información de Pago con Tarjeta -->
+    <div *ngIf="mostrarModalTarjeta" class="col-md-12 mt-3">
+      <div class="form-group">
+        <label for="nombreTarjeta">Nombre en la Tarjeta</label>
+        <input 
+          type="text" 
+          id="nombreTarjeta" 
+          class="form-control" 
+          maxlength="100">
+        <div class="invalid-feedback">
+          El nombre debe tener un máximo de 100 caracteres.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="numeroTarjeta">Número de Tarjeta</label>
+        <input 
+          type="text" 
+          id="numeroTarjeta" 
+          class="form-control" 
+          maxlength="19"
+          pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}">
+        <div class="invalid-feedback">
+          El número de tarjeta debe ser válido y tener un formato de 16 dígitos separados en grupos de 4.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ccv">CCV</label>
+        <input 
+          type="text" 
+          id="ccv" 
+          class="form-control" 
+          maxlength="3"
+          pattern="\d{3}">
+        <div class="invalid-feedback">
+          El código de seguridad (CCV) debe tener 3 dígitos.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="mesVencimiento">Mes de Vencimiento</label>
+            <input 
+              type="number" 
+              id="mesVencimiento" 
+              class="form-control" 
+              maxlength="2"
+              min="1" 
+              max="12">
+            <div class="invalid-feedback">
+              Por favor, ingrese un mes de vencimiento válido (1-12).
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="anioVencimiento">Año de Vencimiento</label>
+            <input 
+              type="number" 
+              id="anioVencimiento" 
+              class="form-control" 
+              maxlength="4"
+              min="{{ currentYear }}" 
+              max="{{ currentYear + 10 }}">
+            <div class="invalid-feedback">
+              Por favor, ingrese un año de vencimiento válido.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Importe Total -->
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="importeTotal">Importe Total</label>
+        <input 
+          type="number" 
+          id="importeTotal" 
+          formControlName="importeTotal" 
+          class="form-control" 
+          readonly
+          [value]="citaForm.get('importeTotal')?.value"
+          [ngClass]="{'is-invalid': citaForm.get('importeTotal')?.invalid && citaForm.get('importeTotal')?.touched}">
+        <div *ngIf="citaForm.get('importeTotal')?.invalid && citaForm.get('importeTotal')?.touched" class="invalid-feedback">
+          Por favor, revise el importe total.
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón Registrar -->
     <div class="row">
       <div class="col-md-12 text-right">
-        <button type="submit" class="btn btn-primary mt-3" [disabled]="citaForm.invalid">Registrar Cita</button>
+        <button 
+          type="submit" 
+          class="btn btn-primary mt-3" 
+          [disabled]="citaForm.invalid">
+          Registrar Cita
+        </button>
       </div>
     </div>
   </form>

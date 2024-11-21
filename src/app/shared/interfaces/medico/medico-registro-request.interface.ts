@@ -1,12 +1,10 @@
-import { HorarioAtencionRegistroRequest } from "./horarioAtencion-registro-request.interface";
-
 export interface MedicoRegistroRequest{
     idMedico?: number,
     idUsuario: number,
-    codigoMedico?: string,
-    especialidad: string,
+    codigoMedico?: number,
+    idEspecialidad: number,
     numeroColegiatura: string,
+    observaciones: string,
     usuarioCreacion: string,
-    usuarioModificacion?: string,
-    horariosAtencion: HorarioAtencionRegistroRequest[];
+    usuarioModificacion?: string    
 }

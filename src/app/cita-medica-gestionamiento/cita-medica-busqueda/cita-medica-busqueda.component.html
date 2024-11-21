@@ -1,55 +1,92 @@
 <div class="container mt-4 form-container">
-    <h3 class="mb-4" *ngIf="!citaSeleccionada">Lista de Citas Médicas</h3>
-  
-    <div *ngIf="!citaSeleccionada">
-      <!-- Filtro de búsqueda -->
-      <div class="row mb-4 align-items-center">
-        <div class="col-md-4">
-          <input 
-            type="text" 
-            id="filtroBusqueda" 
-            class="form-control filtro-input" 
-            [(ngModel)]="filtroBusqueda" 
-            (input)="filtrarCitas()" 
-            placeholder="Buscar por código, motivo de consulta o fecha">
-        </div>
+  <h3 class="mb-4" *ngIf="!citaSeleccionada">Lista de Citas Médicas</h3>
+
+  <div *ngIf="!citaSeleccionada">
+    <!-- Filtros de búsqueda en una fila -->
+    <div class="row mb-4 align-items-center">
+      <!-- Filtro por texto -->
+      <div class="col-md-3">
+        <input 
+          type="text" 
+          id="filtroBusqueda" 
+          class="form-control" 
+          [(ngModel)]="filtroBusqueda" 
+          (input)="filtrarCitas()" 
+          placeholder="Buscar por código de cita, paciente o médico">
       </div>
-  
-      <!-- Lista de citas médicas -->
-      <table class="table table-hover align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>Código de Cita</th>
-            <th>Motivo de Consulta</th>
-            <th>Fecha de la Cita</th>
-            <th>Hora de Inicio</th>
-            <th>Hora de Fin</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cita of citasFiltradas">
-            <td>{{ cita.codigoCitaMedica }}</td>
-            <td>{{ cita.motivoConsulta }}</td>
-            <td>{{ cita.fechaCita | date:'yyyy-MM-dd' }}</td>
-            <td>{{ cita.horaInicio }}</td>
-            <td>{{ cita.horaFin }}</td>
-            <td class="text-end">
-              <button class="btn btn-outline-primary btn-sm me-2" (click)="verDetalleCita(cita)">
-                <i class="bi bi-eye"></i> Ver Detalle
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+      <!-- Filtro por especialidad -->
+      <div class="col-md-3">
+        <select 
+          class="form-control" 
+          [(ngModel)]="filtroEspecialidad" 
+          (change)="filtrarCitas()">
+          <option value="">Todas las Especialidades</option>
+          <option *ngFor="let especialidad of especialidades" [value]="especialidad.idEspecialidad">
+            {{ especialidad.descripcionEspecialidad }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Filtro por fecha de inicio -->
+      <div class="col-md-3">
+        <input 
+          type="date" 
+          class="form-control" 
+          [(ngModel)]="filtroFechaInicio" 
+          (change)="filtrarCitas()" 
+          placeholder="Fecha Inicio">
+      </div>
+
+      <!-- Filtro por fecha de fin -->
+      <div class="col-md-3">
+        <input 
+          type="date" 
+          class="form-control" 
+          [(ngModel)]="filtroFechaFin" 
+          (change)="filtrarCitas()" 
+          placeholder="Fecha Fin">
+      </div>
     </div>
-  
-    <!-- Detalle de la Cita Médica -->
-    <div *ngIf="citaSeleccionada">
-      <app-cita-medica-edicion 
-        [citaMedica]="citaSeleccionada" 
-        (onClose)="cerrarDetalle()">
-      </app-cita-medica-edicion>
-    </div>
+
+    <!-- Lista de citas médicas -->
+    <table class="table table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Código de Cita</th>
+          <th>Especialidad</th>
+          <th>Paciente</th>
+          <th>Médico</th>
+          <th>Fecha Cita</th>
+          <th>Hora Cita</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cita of citasFiltradas">
+          <td>{{ cita.codigoCitaMedica }}</td>            
+          <td>{{ obtenerDescripcionEspecialidad(cita.idEspecialidad) }}</td>            
+          <td>{{ obtenerDescripcionPaciente(cita.idPaciente) }}</td>                        
+          <td>{{ obtenerDescripcionMedico(cita.idMedico) }}</td>            
+          <td>{{ cita.fechaCita | date:'yyyy-MM-dd' }}</td>            
+          <td>{{ obtenerDescripcionHorario(cita.idHorario) }}</td>
+          <td>{{ cita.estadoCita }}</td>
+          <td class="text-end">
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="verDetalleCita(cita)">
+              <i class="bi bi-eye"></i> Ver Detalle
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+
+  <!-- Detalle de la Cita Médica -->
+  <div *ngIf="citaSeleccionada">
+    <app-cita-medica-edicion 
+      [citaMedica]="citaSeleccionada" 
+      (onClose)="cerrarDetalle()">
+    </app-cita-medica-edicion>
+  </div>
+</div>
